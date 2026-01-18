@@ -5,44 +5,65 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For Mnesoma Chidi ❤️</title>
 <style>
-  body {
-    font-family: Arial, Helvetica, sans-serif;
-    margin:0; padding:0;
-    background: linear-gradient(135deg, #ffe6f0, #fff0f5);
-    color: #333;
-    overflow-x: hidden;
+  :root {
+    --primary: #e63946;
+    --secondary: #ff6b81;
+    --bg-gradient: linear-gradient(135deg, #ffe6f0 0%, #fff0f5 100%);
+    --glass: rgba(255, 255, 255, 0.8);
   }
 
+  body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    margin:0; padding:0;
+    background: var(--bg-gradient);
+    color: #333;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  /* Enhanced Navigation */
   nav {
     display: flex;
-    background: #e63946;
+    background: var(--primary);
     color: white;
     justify-content: space-around;
     padding: 15px 0;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 15px rgba(230, 57, 70, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
   }
 
   nav button {
     background: none;
     border: none;
     color: white;
-    font-size: 16px;
+    font-size: 15px;
+    font-weight: 600;
     cursor: pointer;
     transition: 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
   }
 
   nav button:hover {
-    text-decoration: underline;
     transform: scale(1.1);
+    text-shadow: 0 0 8px rgba(255,255,255,0.8);
   }
 
   section {
     display: none;
-    padding: 30px;
+    padding: 40px 20px;
     text-align: center;
+    max-width: 800px;
+    margin: 20px auto;
+    background: var(--glass);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.6s ease;
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
 
   section.active {
@@ -52,74 +73,116 @@
   }
 
   h1 {
-    color: #e63946;
+    color: var(--primary);
+    font-size: 2.5rem;
+    margin-bottom: 20px;
     animation: pulse 2s infinite;
   }
 
   @keyframes pulse {
     0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
+    50% { transform: scale(1.03); text-shadow: 0 0 10px rgba(230, 57, 70, 0.2); }
     100% { transform: scale(1); }
   }
 
-  .heart { font-size: 40px; margin: 15px 0; animation: bounce 1.5s infinite; }
+  .heart { font-size: 50px; margin: 15px 0; animation: bounce 1.5s infinite; filter: drop-shadow(0 5px 5px rgba(0,0,0,0.1)); }
   @keyframes bounce {
     0%,100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
+    50% { transform: translateY(-20px) scale(1.1); }
   }
 
-  img { max-width: 300px; border-radius: 12px; margin: 15px 0; animation: fadein 1.2s ease-in; }
+  img { 
+    max-width: 100%; 
+    height: auto; 
+    border-radius: 20px; 
+    margin: 20px 0; 
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    border: 5px solid white;
+    animation: fadein 1.5s ease-in; 
+  }
+
   @keyframes fadein {
-    from { opacity: 0; transform: scale(0.9); }
-    to { opacity: 1; transform: scale(1); }
+    from { opacity: 0; transform: scale(0.8) rotate(-2deg); }
+    to { opacity: 1; transform: scale(1) rotate(0deg); }
   }
 
   textarea {
-    width: 80%;
+    width: 90%;
     height: 120px;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 12px;
-    border: 1px solid #ccc;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 15px;
+    border: 2px solid #ffd1dc;
+    background: rgba(255, 255, 255, 0.9);
+    font-family: inherit;
     resize: none;
-    transition: transform 0.3s;
+    transition: all 0.3s;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.02);
   }
 
   textarea:focus {
-    transform: scale(1.02);
-    border-color: #e63946;
+    transform: translateY(-2px);
+    border-color: var(--primary);
+    box-shadow: 0 5px 15px rgba(230, 57, 70, 0.1);
     outline: none;
   }
 
   button.submit {
-    background: #e63946;
+    background: var(--primary);
     color: white;
-    padding: 12px 22px;
+    padding: 14px 30px;
     border: none;
-    border-radius: 25px;
+    border-radius: 50px;
+    font-weight: bold;
     cursor: pointer;
     transition: 0.3s;
+    box-shadow: 0 4px 15px rgba(230, 57, 70, 0.3);
   }
 
   button.submit:hover { 
     background: #d62828;
-    transform: scale(1.05);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(230, 57, 70, 0.4);
   }
 
-  .footer { margin-top: 50px; font-size: 14px; color: #555; }
+  ul li {
+    background: white;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.05);
+    transition: 0.3s;
+  }
+  
+  ul li:hover {
+    transform: translateX(10px);
+    border-left: 5px solid var(--primary);
+  }
+
+  .footer { 
+    margin: 50px 0 20px; 
+    font-size: 14px; 
+    color: #888; 
+    text-align: center;
+    font-style: italic;
+  }
 
   /* Floating hearts animation */
   .floating-heart {
     position: fixed;
+    bottom: -50px;
     font-size: 24px;
     color: #ff6b81;
-    animation: floatUp 6s linear infinite;
+    animation: floatUp 6s linear forwards;
     pointer-events: none;
+    z-index: -1;
   }
 
   @keyframes floatUp {
-    0% { transform: translateY(0) rotate(0deg); opacity:1; }
-    100% { transform: translateY(-800px) rotate(360deg); opacity:0; }
+    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(-100vh) rotate(360deg); opacity:0; }
   }
 </style>
 </head>
@@ -136,42 +199,49 @@
 <section id="home" class="active">
   <h1>Hey Mama ❤️</h1>
   <div class="heart">💖</div>
-  <p>Mi vida, Canim, Heartbeat, Mi Amor, Sugar Queen… this page is for you. 🌸✨</p>
-  <p>I just want you to know how special you are to me, Mnesoma Jessica Treasure Chidi. 💕</p>
+  <p style="font-size: 1.2rem; line-height: 1.6;">Mi vida, Canim, Heartbeat, Mi Amor, Sugar Queen… this page is for you. 🌸✨</p>
+  <p>I just want you to know how special you are to me, <strong>Mnesoma Jessica Treasure Chidi</strong>. 💕</p>
   <img src="your-picture.jpg" alt="Us Together">
-  <p>— From Sebastian Precious 💌</p>
+  <p style="font-weight: bold; color: var(--primary); font-size: 1.1rem;">— From Sebastian Precious 💌</p>
 </section>
 
 <section id="love">
   <h1>Love Notes 💌</h1>
+  <div class="heart">🌹</div>
   <p>Mama, mi vida, here are some words from my heart to yours: 💖</p>
-  <p>"Every day with you feels like magic, and you are the queen of my heart. Thank you for being my heartbeat and mi amor. 🌹"</p>
-  <p>Nicknames I call you: Mama, Mi Vida, Canim, Heartbeat, Mi Amor, Sugar Queen ❤️</p>
+  <blockquote style="font-size: 1.3rem; font-style: italic; color: #444; border-left: 4px solid var(--primary); padding: 20px; background: white; border-radius: 10px;">
+    "Every day with you feels like magic, and you are the queen of my heart. Thank you for being my heartbeat and mi amor."
+  </blockquote>
+  <p style="margin-top: 20px;"><strong>Nicknames I call you:</strong></p>
+  <p style="color: var(--primary); font-size: 1.2rem;">Mama • Mi Vida • Canim • Heartbeat • Mi Amor • Sugar Queen ❤️</p>
 </section>
 
 <section id="thoughts">
   <h1>Our Thoughts 📝</h1>
   <p>Write your thoughts here, and I can write mine below:</p>
   <textarea placeholder="Your message here..."></textarea>
-  <button class="submit" onclick="alert('Thank you for sharing your thoughts ❤️')">Send</button>
-  <hr>
+  <button class="submit" onclick="alert('Thank you for sharing your thoughts ❤️')">Send Message</button>
+  <hr style="margin: 30px 0; border: 0; border-top: 1px solid #ffd1dc;">
   <p>My thoughts:</p>
   <textarea placeholder="My message here..."></textarea>
-  <button class="submit" onclick="alert('Message saved ❤️')">Save</button>
+  <button class="submit" onclick="alert('Message saved ❤️')">Save Thoughts</button>
 </section>
 
 <section id="motivation">
   <h1>Motivation & Positivity 🌟</h1>
-  <p>Life is better when we grow together. 💫</p>
-  <p>"A strong relationship is built on love, trust, and small everyday acts of care." 🌸</p>
-  <p>"You are my inspiration, and together we can achieve anything." 💪❤️</p>
+  <div class="heart">💫</div>
+  <p>Life is better when we grow together.</p>
+  <div style="background: white; padding: 20px; border-radius: 15px; margin: 15px 0;">
+    <p>"A strong relationship is built on love, trust, and small everyday acts of care." 🌸</p>
+    <p><strong>"You are my inspiration, and together we can achieve anything." 💪❤️</strong></p>
+  </div>
   <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cmVsYXRpb25zaGlwfGVufDB8fDB8fA&ixlib=rb-4.0.3&q=80&w=400" alt="Motivation">
 </section>
 
 <section id="relationship">
   <h1>Relationship Tips 💑</h1>
   <p>Here are some things to keep our love strong: 💕✨</p>
-  <ul style="list-style:none; padding:0; text-align:left; max-width:400px; margin: 0 auto;">
+  <ul style="list-style:none; padding:0; text-align:left; max-width:450px; margin: 0 auto;">
     <li>❤️ Communicate openly and honestly</li>
     <li>❤️ Respect each other's feelings and space</li>
     <li>❤️ Celebrate small moments together</li>
@@ -182,25 +252,34 @@
 </section>
 
 <div class="footer">
-  Developed by Sebastian Precious to Mnesoma Chidi 💖
+  Developed with love by Sebastian Precious for Mnesoma Chidi 💖
 </div>
 
 <script>
 function showPage(pageId) {
   const sections = document.querySelectorAll('section');
-  sections.forEach(sec => sec.classList.remove('active'));
-  document.getElementById(pageId).classList.add('active');
+  sections.forEach(sec => {
+    sec.classList.remove('active');
+  });
+  
+  const activeSection = document.getElementById(pageId);
+  activeSection.classList.add('active');
+  
+  // Scroll to top of section on mobile
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // Floating hearts generator
+const heartEmojis = ['💖', '❤️', '💕', '🌸', '✨', '🌹'];
 setInterval(() => {
   const heart = document.createElement('div');
   heart.className = 'floating-heart';
-  heart.style.left = Math.random() * window.innerWidth + 'px';
-  heart.innerText = '💖';
+  heart.style.left = Math.random() * 100 + 'vw';
+  heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+  heart.innerText = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
   document.body.appendChild(heart);
   setTimeout(() => heart.remove(), 6000);
-}, 800);
+}, 600);
 </script>
 
 </body>
