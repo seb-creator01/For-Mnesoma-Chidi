@@ -24,13 +24,13 @@
     user-select: none; /* Prevents text selection during double tap */
   }
 
-  /* Enhanced Navigation - Mobile Scrollable */
+  /* --- UPDATED: Glowing Navigation - Mobile Scrollable --- */
   nav {
     display: flex;
     background: var(--primary);
     color: white;
-    justify-content: space-around;
-    padding: 15px 0;
+    justify-content: flex-start; /* Better for scrolling */
+    padding: 15px 10px;
     box-shadow: 0 4px 15px rgba(230, 57, 70, 0.3);
     position: sticky;
     top: 0;
@@ -38,28 +38,64 @@
     overflow-x: auto;
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
+    gap: 8px;
   }
 
   nav::-webkit-scrollbar { display: none; }
 
   nav button {
-    background: none;
-    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.4);
     color: white;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
     cursor: pointer;
     transition: 0.3s;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    padding: 0 15px;
+    padding: 8px 18px;
     flex-shrink: 0;
+    border-radius: 50px;
   }
 
-  nav button:hover {
-    transform: scale(1.1);
-    text-shadow: 0 0 8px rgba(255,255,255,0.8);
+  nav button:hover, nav button.active-btn {
+    background: white;
+    color: var(--primary);
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.7); /* Glow effect */
   }
+
+  /* Swipe Hint */
+  .swipe-indicator {
+    background: var(--primary);
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 10px;
+    text-align: right;
+    padding: 2px 15px;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+
+  /* --- Music Control Styling --- */
+  .music-control {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 2000;
+    background: white;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    cursor: pointer;
+    border: 2px solid var(--primary);
+    font-size: 20px;
+  }
+  .playing { animation: rotate 4s linear infinite; }
+  @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
   section {
     display: none;
@@ -236,18 +272,53 @@
     90% { opacity: 0.8; }
     100% { transform: translateY(-100vh) rotate(360deg); opacity:0; }
   }
+
+  /* --- NEW: Thought Bubble Styles --- */
+  .thought-bubble {
+    background: white;
+    padding: 15px;
+    border-radius: 15px;
+    margin: 10px 0;
+    text-align: left;
+    position: relative;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    font-size: 0.9rem;
+    color: #444;
+    border-left: 4px solid var(--secondary);
+    animation: fadeIn 0.5s ease;
+  }
+  .delete-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: #ccc;
+    cursor: pointer;
+    font-size: 12px;
+  }
+  .delete-btn:hover { color: var(--primary); }
+  @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+
 </style>
 </head>
-<body ondblclick="sendKiss(event)">
+<body onclick="startMusic()" ondblclick="sendKiss(event)">
 
-<nav>
-  <button onclick="showPage('home')">Home</button>
-  <button onclick="showPage('love')">Love Notes</button>
-  <button onclick="showPage('journey')">Our Journey</button>
-  <button onclick="showPage('thoughts')">Our Thoughts</button>
-  <button onclick="showPage('motivation')">Motivation</button>
-  <button onclick="showPage('relationship')">Tips</button>
+<audio id="loveSong" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<div class="music-control" id="musicBtn" onclick="toggleMusic(event)">🎵</div>
+
+<nav id="topNav">
+  <button onclick="showPage('home', this)" class="active-btn">Home</button>
+  <button onclick="showPage('love', this)">Love Notes</button>
+  <button onclick="showPage('journey', this)">Our Journey</button>
+  <button onclick="showPage('thoughts', this)">Our Thoughts</button>
+  <button onclick="showPage('motivation', this)">Motivation</button>
+  <button onclick="showPage('relationship', this)">Tips</button>
 </nav>
+<div class="swipe-indicator">Swipe for more pages ➔</div>
 
 <section id="home" class="active">
   <h2 id="greeting" style="color: var(--secondary); margin: 0; font-size: 1.1rem;">Hi There!</h2>
@@ -275,6 +346,10 @@
   <div style="background: white; padding: 20px; border-radius: 20px; margin-bottom: 25px; box-shadow: inset 0 0 10px rgba(0,0,0,0.02);">
     <p>"Every day with you feels like magic, and you are the queen of my heart. Thank you for being my heartbeat and mi amor. 🌹"</p>
   </div>
+
+  <div style="background: #fff5f7; padding: 15px; border-radius: 15px; margin-bottom: 20px; border-left: 4px solid var(--primary); text-align: left;">
+    <p style="margin:0; font-style: italic;">"In your smile, I see something more beautiful than the stars." ✨</p>
+  </div>
   
   <h3>A little reminder...</h3>
   <div id="reason-display">Click the button below for a reason why I love you!</div>
@@ -300,37 +375,51 @@
       <p>Building our dreams, side by side, forever.</p>
     </div>
   </div>
+  <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400" alt="Love Journey">
 </section>
 
 <section id="thoughts">
   <h1>Our Thoughts 📝</h1>
   <p>Write your thoughts here, and I can write mine below:</p>
-  <textarea placeholder="Your message here..."></textarea>
-  <button class="submit" onclick="alert('Thank you for sharing your thoughts ❤️')">Send</button>
+  <textarea id="mamaInput" placeholder="Your message here, Mama..."></textarea>
+  <button class="submit" onclick="saveThought('mama')">Send & Save ❤️</button>
+  
+  <div id="mamaThoughtsContainer" style="margin-top: 15px;"></div>
+
   <hr style="border: 0; border-top: 1px solid #eee; margin: 30px 0;">
+  
   <p>My thoughts:</p>
-  <textarea placeholder="My message here..."></textarea>
-  <button class="submit" onclick="alert('Message saved ❤️')">Save</button>
+  <textarea id="sebastianInput" placeholder="My message here..."></textarea>
+  <button class="submit" onclick="saveThought('sebastian')">Save My Thought ❤️</button>
+  
+  <div id="sebastianThoughtsContainer" style="margin-top: 15px;"></div>
 </section>
 
 <section id="motivation">
   <h1>Motivation & Positivity 🌟</h1>
   <p>Life is better when we grow together. 💫</p>
+  <p style="font-weight: bold; color: var(--primary);">"Mnesoma, you are stronger than you know and more loved than you can imagine."</p>
   <p>"A strong relationship is built on love, trust, and small everyday acts of care." 🌸</p>
   <p>"You are my inspiration, and together we can achieve anything." 💪❤️</p>
-  <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400" alt="Motivation">
+  
+  <div style="background: white; padding: 15px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin: 20px 0;">
+    <p style="margin:0; color: #555;">🌟 <strong>Keep shining, Mama. The world needs your light.</strong></p>
+  </div>
+
+  <img src="https://images.unsplash.com/photo-1490730141103-6cac27aaab94?w=400" alt="Beautiful Sunset Motivation">
 </section>
 
 <section id="relationship">
   <h1>Relationship Tips 💑</h1>
   <p>Things to keep our love strong: 💕✨</p>
   <ul style="list-style:none; padding:0; text-align:left; max-width:100%; margin: 0 auto;">
-    <li style="margin: 12px 0; background: white; padding: 10px; border-radius: 10px;">❤️ Communicate openly and honestly</li>
-    <li style="margin: 12px 0; background: white; padding: 10px; border-radius: 10px;">❤️ Respect each other's feelings and space</li>
-    <li style="margin: 12px 0; background: white; padding: 10px; border-radius: 10px;">❤️ Celebrate small moments together</li>
-    <li style="margin: 12px 0; background: white; padding: 10px; border-radius: 10px;">❤️ Support each other's dreams</li>
-    <li style="margin: 12px 0; background: white; padding: 10px; border-radius: 10px;">❤️ Forgive mistakes but learn from them</li>
+    <li style="margin: 12px 0; background: white; padding: 12px; border-radius: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">❤️ Communicate openly and honestly</li>
+    <li style="margin: 12px 0; background: white; padding: 12px; border-radius: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">❤️ Respect each other's feelings and space</li>
+    <li style="margin: 12px 0; background: white; padding: 12px; border-radius: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">❤️ Celebrate small moments together</li>
+    <li style="margin: 12px 0; background: white; padding: 12px; border-radius: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">❤️ Support each other's dreams</li>
+    <li style="margin: 12px 0; background: white; padding: 12px; border-radius: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">❤️ Forgive mistakes but learn from them</li>
   </ul>
+  <img src="https://images.unsplash.com/photo-1516589174184-c685265142ec?w=400" alt="Love and Support">
 </section>
 
 <div class="footer">
@@ -338,7 +427,70 @@
 </div>
 
 <script>
-// --- Countdown Logic (Set your date here!) ---
+// --- Thoughts Logic (Local Storage) ---
+function loadThoughts() {
+    ['mama', 'sebastian'].forEach(user => {
+        const container = document.getElementById(user + 'ThoughtsContainer');
+        const saved = JSON.parse(localStorage.getItem('thoughts_' + user) || '[]');
+        container.innerHTML = '';
+        saved.forEach((text, index) => {
+            const bubble = document.createElement('div');
+            bubble.className = 'thought-bubble';
+            bubble.innerHTML = `${text} <button class="delete-btn" onclick="deleteThought('${user}', ${index})">✕</button>`;
+            container.appendChild(bubble);
+        });
+    });
+}
+
+function saveThought(user) {
+    const input = document.getElementById(user + 'Input');
+    if (!input.value.trim()) return;
+    const saved = JSON.parse(localStorage.getItem('thoughts_' + user) || '[]');
+    saved.unshift(input.value.trim());
+    localStorage.setItem('thoughts_' + user, JSON.stringify(saved));
+    input.value = '';
+    loadThoughts();
+    alert('Thought saved ❤️');
+}
+
+function deleteThought(user, index) {
+    const saved = JSON.parse(localStorage.getItem('thoughts_' + user) || '[]');
+    saved.splice(index, 1);
+    localStorage.setItem('thoughts_' + user, JSON.stringify(saved));
+    loadThoughts();
+}
+
+// Initialize thoughts on load
+window.addEventListener('load', loadThoughts);
+
+// --- Music Setup (Auto-starts on first tap) ---
+const song = document.getElementById('loveSong');
+const musicBtn = document.getElementById('musicBtn');
+let playing = false;
+
+function startMusic() {
+    if (!playing) {
+        song.play().catch(e => console.log("Waiting for user interaction..."));
+        playing = true;
+        musicBtn.classList.add('playing');
+    }
+}
+
+function toggleMusic(e) {
+    e.stopPropagation(); 
+    if (playing) {
+        song.pause();
+        musicBtn.classList.remove('playing');
+        musicBtn.innerText = "🔇";
+    } else {
+        song.play();
+        musicBtn.classList.add('playing');
+        musicBtn.innerText = "🎵";
+    }
+    playing = !playing;
+}
+
+// --- Countdown Logic ---
 const targetDate = new Date("Feb 14, 2026 00:00:00").getTime();
 
 setInterval(() => {
@@ -355,9 +507,8 @@ function sendKiss(e) {
     const kiss = document.createElement('div');
     kiss.className = 'kiss';
     kiss.innerText = '💋';
-    // Position near tap
-    const x = e.pageX || e.touches[0].pageX;
-    const y = e.pageY || e.touches[0].pageY;
+    const x = e.pageX || (e.touches ? e.touches[0].pageX : window.innerWidth/2);
+    const y = e.pageY || (e.touches ? e.touches[0].pageY : window.innerHeight/2);
     kiss.style.left = x + (Math.random() * 60 - 30) + 'px';
     kiss.style.top = y + (Math.random() * 60 - 30) + 'px';
     kiss.style.fontSize = (Math.random() * 20 + 20) + 'px';
@@ -388,7 +539,9 @@ const reasons = [
   "The way you say my name—it's my favorite sound.",
   "Your strength and how you handle everything with grace.",
   "Because you are my best friend and my soulmate.",
-  "The way you make even the simplest moments feel special."
+  "The way you make even the simplest moments feel special.",
+  "Your intelligence and the way you think.",
+  "The peace I feel whenever I talk to you."
 ];
 
 function generateReason() {
@@ -401,10 +554,13 @@ function generateReason() {
   }, 300);
 }
 
-function showPage(pageId) {
+function showPage(pageId, btn) {
   const sections = document.querySelectorAll('section');
+  const buttons = document.querySelectorAll('nav button');
   sections.forEach(sec => sec.classList.remove('active'));
+  buttons.forEach(b => b.classList.remove('active-btn'));
   document.getElementById(pageId).classList.add('active');
+  if(btn) btn.classList.add('active-btn');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
