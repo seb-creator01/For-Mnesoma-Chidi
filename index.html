@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Mnesoma Chidi ❤️</title>
+<style>
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin:0; padding:0;
+    background: #ffe6f0;
+    color: #333;
+  }
+
+  nav {
+    display: flex;
+    background: #e63946;
+    color: white;
+    justify-content: space-around;
+    padding: 15px 0;
+  }
+
+  nav button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  nav button:hover {
+    text-decoration: underline;
+  }
+
+  section {
+    display: none;
+    padding: 30px;
+    text-align: center;
+  }
+
+  section.active {
+    display: block;
+  }
+
+  h1 {
+    color: #e63946;
+  }
+
+  .heart { font-size: 40px; margin: 15px 0; }
+
+  img { max-width: 300px; border-radius: 12px; margin: 15px 0; }
+
+  textarea {
+    width: 80%;
+    height: 120px;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    resize: none;
+  }
+
+  button.submit {
+    background: #e63946;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+
+  button.submit:hover { background: #d62828; }
+
+  .footer { margin-top: 50px; font-size: 14px; color: #555; }
+</style>
+</head>
+<body>
+
+<nav>
+  <button onclick="showPage('home')">Home</button>
+  <button onclick="showPage('love')">Love Notes</button>
+  <button onclick="showPage('thoughts')">Our Thoughts</button>
+  <button onclick="showPage('motivation')">Motivation</button>
+  <button onclick="showPage('relationship')">Relationship Tips</button>
+</nav>
+
+<section id="home" class="active">
+  <h1>Hey Mama ❤️</h1>
+  <div class="heart">💖</div>
+  <p>Mi vida, Canim, Heartbeat, Mi Amor, Sugar Queen… this page is for you.</p>
+  <p>I just want you to know how special you are to me, Mnesoma Jessica Treasure Chidi.</p>
+  <img src="your-picture.jpg" alt="Us Together">
+  <p>— From Sebastian Precious</p>
+</section>
+
+<section id="love">
+  <h1>Love Notes 💌</h1>
+  <p>Mama, mi vida, here are some words from my heart to yours:</p>
+  <p>"Every day with you feels like magic, and you are the queen of my heart. Thank you for being my heartbeat and mi amor."</p>
+  <p>Nicknames I call you: Mama, Mi Vida, Canim, Heartbeat, Mi Amor, Sugar Queen ❤️</p>
+</section>
+
+<section id="thoughts">
+  <h1>Our Thoughts 📝</h1>
+  <p>Write your thoughts here, and I can write mine below:</p>
+  <textarea placeholder="Your message here..."></textarea>
+  <button class="submit" onclick="alert('Thank you for sharing your thoughts ❤️')">Send</button>
+  <hr>
+  <p>My thoughts:</p>
+  <textarea placeholder="My message here..."></textarea>
+  <button class="submit" onclick="alert('Message saved ❤️')">Save</button>
+</section>
+
+<section id="motivation">
+  <h1>Motivation & Positivity 🌟</h1>
+  <p>Life is better when we grow together.</p>
+  <p>"A strong relationship is built on love, trust, and small everyday acts of care."</p>
+  <p>"You are my inspiration, and together we can achieve anything."</p>
+  <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cmVsYXRpb25zaGlwfGVufDB8fDB8fA&ixlib=rb-4.0.3&q=80&w=400" alt="Motivation">
+</section>
+
+<section id="relationship">
+  <h1>Relationship Tips 💑</h1>
+  <p>Here are some things to keep our love strong:</p>
+  <ul style="list-style:none; padding:0; text-align:left; max-width:400px; margin: 0 auto;">
+    <li>❤️ Communicate openly and honestly</li>
+    <li>❤️ Respect each other's feelings and space</li>
+    <li>❤️ Celebrate small moments together</li>
+    <li>❤️ Support each other's dreams</li>
+    <li>❤️ Forgive mistakes but learn from them</li>
+  </ul>
+  <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400" alt="Couple Love">
+</section>
+
+<div class="footer">
+  Developed by Sebastian Precious to Mnesoma Chidi
+</div>
+
+<script>
+function showPage(pageId) {
+  const sections = document.querySelectorAll('section');
+  sections.forEach(sec => sec.classList.remove('active'));
+  document.getElementById(pageId).classList.add('active');
+}
+</script>
+
+</body>
+  </html>
