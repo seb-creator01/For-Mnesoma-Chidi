@@ -8,8 +8,9 @@
   :root {
     --primary: #e63946;
     --secondary: #ff6b81;
-    --bg-gradient: linear-gradient(135deg, #ffe6f0 0%, #fff0f5 100%);
-    --glass: rgba(255, 255, 255, 0.8);
+    --accent: #ffb703;
+    --bg-gradient: linear-gradient(135deg, #fff5f7 0%, #ffeef2 100%);
+    --glass: rgba(255, 255, 255, 0.85);
   }
 
   body {
@@ -38,12 +39,12 @@
     background: none;
     border: none;
     color: white;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
     cursor: pointer;
     transition: 0.3s;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
   }
 
   nav button:hover {
@@ -58,12 +59,13 @@
     max-width: 800px;
     margin: 20px auto;
     background: var(--glass);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    backdrop-filter: blur(12px);
+    border-radius: 30px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.05);
     opacity: 0;
     transform: translateY(30px);
     transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(255,255,255,0.3);
   }
 
   section.active {
@@ -74,21 +76,21 @@
 
   h1 {
     color: var(--primary);
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     margin-bottom: 20px;
     animation: pulse 2s infinite;
   }
 
   @keyframes pulse {
     0% { transform: scale(1); }
-    50% { transform: scale(1.03); text-shadow: 0 0 10px rgba(230, 57, 70, 0.2); }
+    50% { transform: scale(1.02); }
     100% { transform: scale(1); }
   }
 
-  .heart { font-size: 50px; margin: 15px 0; animation: bounce 1.5s infinite; filter: drop-shadow(0 5px 5px rgba(0,0,0,0.1)); }
+  .heart { font-size: 50px; margin: 15px 0; animation: bounce 1.5s infinite; }
   @keyframes bounce {
     0%,100% { transform: translateY(0); }
-    50% { transform: translateY(-20px) scale(1.1); }
+    50% { transform: translateY(-15px); }
   }
 
   img { 
@@ -96,83 +98,87 @@
     height: auto; 
     border-radius: 20px; 
     margin: 20px 0; 
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-    border: 5px solid white;
-    animation: fadein 1.5s ease-in; 
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    border: 8px solid white;
   }
 
-  @keyframes fadein {
-    from { opacity: 0; transform: scale(0.8) rotate(-2deg); }
-    to { opacity: 1; transform: scale(1) rotate(0deg); }
+  /* Timeline Design */
+  .timeline {
+    text-align: left;
+    max-width: 500px;
+    margin: 30px auto;
+    position: relative;
+    padding-left: 30px;
+    border-left: 2px solid var(--secondary);
+  }
+
+  .timeline-item {
+    margin-bottom: 25px;
+    position: relative;
+  }
+
+  .timeline-item::before {
+    content: '❤️';
+    position: absolute;
+    left: -42px;
+    background: white;
+    border-radius: 50%;
+    padding: 2px;
+  }
+
+  /* Surprise Generator */
+  #reason-display {
+    min-height: 60px;
+    margin: 20px 0;
+    padding: 20px;
+    background: white;
+    border-radius: 15px;
+    font-style: italic;
+    color: var(--primary);
+    font-weight: 600;
+    border: 1px dashed var(--secondary);
   }
 
   textarea {
     width: 90%;
-    height: 120px;
+    height: 100px;
     padding: 15px;
     margin: 15px 0;
     border-radius: 15px;
-    border: 2px solid #ffd1dc;
-    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ffd1dc;
     font-family: inherit;
     resize: none;
-    transition: all 0.3s;
-    box-shadow: inset 0 2px 5px rgba(0,0,0,0.02);
-  }
-
-  textarea:focus {
-    transform: translateY(-2px);
-    border-color: var(--primary);
-    box-shadow: 0 5px 15px rgba(230, 57, 70, 0.1);
     outline: none;
   }
 
   button.submit {
     background: var(--primary);
     color: white;
-    padding: 14px 30px;
+    padding: 12px 28px;
     border: none;
     border-radius: 50px;
     font-weight: bold;
     cursor: pointer;
     transition: 0.3s;
-    box-shadow: 0 4px 15px rgba(230, 57, 70, 0.3);
+    box-shadow: 0 4px 15px rgba(230, 57, 70, 0.2);
   }
 
   button.submit:hover { 
     background: #d62828;
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(230, 57, 70, 0.4);
-  }
-
-  ul li {
-    background: white;
-    margin: 10px 0;
-    padding: 15px;
-    border-radius: 12px;
-    box-shadow: 2px 2px 10px rgba(0,0,0,0.05);
-    transition: 0.3s;
-  }
-  
-  ul li:hover {
-    transform: translateX(10px);
-    border-left: 5px solid var(--primary);
+    transform: translateY(-2px);
   }
 
   .footer { 
-    margin: 50px 0 20px; 
-    font-size: 14px; 
-    color: #888; 
+    margin: 40px 0; 
+    font-size: 13px; 
+    color: #999; 
     text-align: center;
-    font-style: italic;
   }
 
-  /* Floating hearts animation */
+  /* Floating elements */
   .floating-heart {
     position: fixed;
     bottom: -50px;
-    font-size: 24px;
-    color: #ff6b81;
     animation: floatUp 6s linear forwards;
     pointer-events: none;
     z-index: -1;
@@ -180,8 +186,8 @@
 
   @keyframes floatUp {
     0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-    10% { opacity: 1; }
-    90% { opacity: 1; }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.8; }
     100% { transform: translateY(-100vh) rotate(360deg); opacity:0; }
   }
 </style>
@@ -191,95 +197,139 @@
 <nav>
   <button onclick="showPage('home')">Home</button>
   <button onclick="showPage('love')">Love Notes</button>
+  <button onclick="showPage('journey')">Our Journey</button>
   <button onclick="showPage('thoughts')">Our Thoughts</button>
   <button onclick="showPage('motivation')">Motivation</button>
-  <button onclick="showPage('relationship')">Relationship Tips</button>
+  <button onclick="showPage('relationship')">Tips</button>
 </nav>
 
 <section id="home" class="active">
+  <h2 id="greeting" style="color: var(--secondary); margin: 0;">Hi There!</h2>
   <h1>Hey Mama ❤️</h1>
   <div class="heart">💖</div>
-  <p style="font-size: 1.2rem; line-height: 1.6;">Mi vida, Canim, Heartbeat, Mi Amor, Sugar Queen… this page is for you. 🌸✨</p>
+  <p style="font-size: 1.1rem;">Mi vida, Canim, Heartbeat, Mi Amor, Sugar Queen… this page is for you. 🌸</p>
   <p>I just want you to know how special you are to me, <strong>Mnesoma Jessica Treasure Chidi</strong>. 💕</p>
   <img src="your-picture.jpg" alt="Us Together">
-  <p style="font-weight: bold; color: var(--primary); font-size: 1.1rem;">— From Sebastian Precious 💌</p>
+  <p style="font-weight: bold; color: var(--primary);">— From Sebastian Precious 💌</p>
 </section>
 
 <section id="love">
   <h1>Love Notes 💌</h1>
-  <div class="heart">🌹</div>
   <p>Mama, mi vida, here are some words from my heart to yours: 💖</p>
-  <blockquote style="font-size: 1.3rem; font-style: italic; color: #444; border-left: 4px solid var(--primary); padding: 20px; background: white; border-radius: 10px;">
-    "Every day with you feels like magic, and you are the queen of my heart. Thank you for being my heartbeat and mi amor."
-  </blockquote>
-  <p style="margin-top: 20px;"><strong>Nicknames I call you:</strong></p>
-  <p style="color: var(--primary); font-size: 1.2rem;">Mama • Mi Vida • Canim • Heartbeat • Mi Amor • Sugar Queen ❤️</p>
+  <div style="background: white; padding: 25px; border-radius: 20px; margin-bottom: 25px; box-shadow: inset 0 0 10px rgba(0,0,0,0.02);">
+    <p>"Every day with you feels like magic, and you are the queen of my heart. Thank you for being my heartbeat and mi amor. 🌹"</p>
+  </div>
+  
+  <h3>A little reminder...</h3>
+  <div id="reason-display">Click the button below for a reason why I love you!</div>
+  <button class="submit" onclick="generateReason()">Click Me, Mama ❤️</button>
+  
+  <p style="margin-top: 30px; font-size: 0.9rem;">Nicknames: Mama, Mi Vida, Canim, Heartbeat, Mi Amor, Sugar Queen ❤️</p>
+</section>
+
+<section id="journey">
+  <h1>Our Journey 🛣️</h1>
+  <p>Thinking about how far we've come... 🌸</p>
+  <div class="timeline">
+    <div class="timeline-item">
+      <strong>The Beginning</strong>
+      <p>When our paths first crossed and life changed for the better.</p>
+    </div>
+    <div class="timeline-item">
+      <strong>Growing Together</strong>
+      <p>Every conversation and moment that built our bond.</p>
+    </div>
+    <div class="timeline-item">
+      <strong>The Future</strong>
+      <p>Building our dreams, side by side, forever.</p>
+    </div>
+  </div>
 </section>
 
 <section id="thoughts">
   <h1>Our Thoughts 📝</h1>
   <p>Write your thoughts here, and I can write mine below:</p>
   <textarea placeholder="Your message here..."></textarea>
-  <button class="submit" onclick="alert('Thank you for sharing your thoughts ❤️')">Send Message</button>
-  <hr style="margin: 30px 0; border: 0; border-top: 1px solid #ffd1dc;">
+  <button class="submit" onclick="alert('Thank you for sharing your thoughts ❤️')">Send</button>
+  <hr style="border: 0; border-top: 1px solid #eee; margin: 30px 0;">
   <p>My thoughts:</p>
   <textarea placeholder="My message here..."></textarea>
-  <button class="submit" onclick="alert('Message saved ❤️')">Save Thoughts</button>
+  <button class="submit" onclick="alert('Message saved ❤️')">Save</button>
 </section>
 
 <section id="motivation">
   <h1>Motivation & Positivity 🌟</h1>
-  <div class="heart">💫</div>
-  <p>Life is better when we grow together.</p>
-  <div style="background: white; padding: 20px; border-radius: 15px; margin: 15px 0;">
-    <p>"A strong relationship is built on love, trust, and small everyday acts of care." 🌸</p>
-    <p><strong>"You are my inspiration, and together we can achieve anything." 💪❤️</strong></p>
-  </div>
-  <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cmVsYXRpb25zaGlwfGVufDB8fDB8fA&ixlib=rb-4.0.3&q=80&w=400" alt="Motivation">
+  <p>Life is better when we grow together. 💫</p>
+  <p>"A strong relationship is built on love, trust, and small everyday acts of care." 🌸</p>
+  <p>"You are my inspiration, and together we can achieve anything." 💪❤️</p>
+  <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400" alt="Motivation">
 </section>
 
 <section id="relationship">
   <h1>Relationship Tips 💑</h1>
-  <p>Here are some things to keep our love strong: 💕✨</p>
-  <ul style="list-style:none; padding:0; text-align:left; max-width:450px; margin: 0 auto;">
-    <li>❤️ Communicate openly and honestly</li>
-    <li>❤️ Respect each other's feelings and space</li>
-    <li>❤️ Celebrate small moments together</li>
-    <li>❤️ Support each other's dreams</li>
-    <li>❤️ Forgive mistakes but learn from them</li>
+  <p>Things to keep our love strong: 💕✨</p>
+  <ul style="list-style:none; padding:0; text-align:left; max-width:400px; margin: 0 auto;">
+    <li style="margin: 10px 0;">❤️ Communicate openly and honestly</li>
+    <li style="margin: 10px 0;">❤️ Respect each other's feelings and space</li>
+    <li style="margin: 10px 0;">❤️ Celebrate small moments together</li>
+    <li style="margin: 10px 0;">❤️ Support each other's dreams</li>
+    <li style="margin: 10px 0;">❤️ Forgive mistakes but learn from them</li>
   </ul>
-  <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400" alt="Couple Love">
 </section>
 
 <div class="footer">
-  Developed with love by Sebastian Precious for Mnesoma Chidi 💖
+  Developed by Sebastian Precious to Mnesoma Chidi 💖
 </div>
 
 <script>
+// Dynamic Greeting
+function setGreeting() {
+  const hour = new Date().getHours();
+  const greetingElement = document.getElementById('greeting');
+  if (hour < 12) greetingElement.innerText = "Good Morning, My Queen ☀️";
+  else if (hour < 18) greetingElement.innerText = "Good Afternoon, Mi Amor 🌸";
+  else greetingElement.innerText = "Good Evening, Heartbeat 🌙";
+}
+setGreeting();
+
+// Reason Generator
+const reasons = [
+  "The way your smile lights up my whole world.",
+  "Your kind heart and how you care for others.",
+  "How you are my biggest inspiration every single day.",
+  "The way you say my name—it's my favorite sound.",
+  "Your strength and how you handle everything with grace.",
+  "Because you are my best friend and my soulmate.",
+  "The way you make even the simplest moments feel special."
+];
+
+function generateReason() {
+  const display = document.getElementById('reason-display');
+  const randomReason = reasons[Math.floor(Math.random() * reasons.length)];
+  display.style.opacity = 0;
+  setTimeout(() => {
+    display.innerText = randomReason;
+    display.style.opacity = 1;
+  }, 300);
+}
+
 function showPage(pageId) {
   const sections = document.querySelectorAll('section');
-  sections.forEach(sec => {
-    sec.classList.remove('active');
-  });
-  
-  const activeSection = document.getElementById(pageId);
-  activeSection.classList.add('active');
-  
-  // Scroll to top of section on mobile
+  sections.forEach(sec => sec.classList.remove('active'));
+  document.getElementById(pageId).classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // Floating hearts generator
-const heartEmojis = ['💖', '❤️', '💕', '🌸', '✨', '🌹'];
 setInterval(() => {
   const heart = document.createElement('div');
   heart.className = 'floating-heart';
   heart.style.left = Math.random() * 100 + 'vw';
-  heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
-  heart.innerText = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+  heart.innerText = ['💖', '❤️', '💕', '✨'][Math.floor(Math.random() * 4)];
+  heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
   document.body.appendChild(heart);
   setTimeout(() => heart.remove(), 6000);
-}, 600);
+}, 800);
 </script>
 
 </body>
