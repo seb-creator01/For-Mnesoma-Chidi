@@ -4,6 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>For Mnesoma Chidi ❤️</title>
+
+<meta property="og:title" content="A Special Surprise for Mnesoma">
+<meta property="og:description" content="Open this, my love. From Sebastian.">
+<meta property="og:image" content="https://i.ibb.co/vvDyjfCQ/photo.jpg">
+
 <style>
   :root {
     --primary: #e63946;
@@ -302,10 +307,10 @@
 
 </style>
 </head>
-<body onclick="startMusic()" ondblclick="sendKiss(event)">
+<body ondblclick="sendKiss(event)">
 
 <audio id="loveSong" loop>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
 </audio>
 
 <div class="music-control" id="musicBtn" onclick="toggleMusic(event)">🎵</div>
@@ -336,13 +341,14 @@
   <p style="font-size: 0.8rem; color: var(--secondary); font-weight: bold; margin-bottom: 20px;">Until our next special moment! ✨</p>
 
   <p>I just want you to know how special you are to me, <strong>Mnesoma Jessica Treasure Chidi</strong>. 💕</p>
-  <img src="your-picture.jpg" alt="Us Together">
+  <img src="https://i.ibb.co/vvDyjfCQ/photo.jpg" alt="Us Together">
   <p style="font-weight: bold; color: var(--primary);">— From Sebastian Precious 💌</p>
 </section>
 
 <section id="love">
   <h1>Love Notes 💌</h1>
   <p>Mama, mi vida, here are some words from my heart to yours: 💖</p>
+  <img src="https://i.ibb.co/VppbPBfD/photo.jpg" alt="Love Note Photo">
   <div style="background: white; padding: 20px; border-radius: 20px; margin-bottom: 25px; box-shadow: inset 0 0 10px rgba(0,0,0,0.02);">
     <p>"Every day with you feels like magic, and you are the queen of my heart. Thank you for being my heartbeat and mi amor. 🌹"</p>
   </div>
@@ -365,17 +371,20 @@
     <div class="timeline-item">
       <strong>The Beginning</strong>
       <p>When our paths first crossed and life changed for the better.</p>
+      <img src="https://i.ibb.co/gs5X295/photo.jpg" alt="Our Start">
     </div>
     <div class="timeline-item">
       <strong>Growing Together</strong>
       <p>Every conversation and moment that built our bond.</p>
+      <img src="https://i.ibb.co/VkR1q6K/photo.jpg" alt="Our Growth">
     </div>
     <div class="timeline-item">
       <strong>The Future</strong>
       <p>Building our dreams, side by side, forever.</p>
+      <img src="https://i.ibb.co/N6ZYbQt7/photo.jpg" alt="Our Future">
     </div>
   </div>
-  <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400" alt="Love Journey">
+  <img src="https://i.ibb.co/4npR2y0R/photo.jpg" alt="Love Journey Ending">
 </section>
 
 <section id="thoughts">
@@ -397,6 +406,7 @@
 
 <section id="motivation">
   <h1>Motivation & Positivity 🌟</h1>
+  <img src="https://i.ibb.co/WpgL6ZnN/photo.jpg" alt="Motivation Image">
   <p>Life is better when we grow together. 💫</p>
   <p style="font-weight: bold; color: var(--primary);">"Mnesoma, you are stronger than you know and more loved than you can imagine."</p>
   <p>"A strong relationship is built on love, trust, and small everyday acts of care." 🌸</p>
@@ -405,8 +415,6 @@
   <div style="background: white; padding: 15px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin: 20px 0;">
     <p style="margin:0; color: #555;">🌟 <strong>Keep shining, Mama. The world needs your light.</strong></p>
   </div>
-
-  <img src="https://images.unsplash.com/photo-1490730141103-6cac27aaab94?w=400" alt="Beautiful Sunset Motivation">
 </section>
 
 <section id="relationship">
@@ -463,31 +471,21 @@ function deleteThought(user, index) {
 // Initialize thoughts on load
 window.addEventListener('load', loadThoughts);
 
-// --- Music Setup (Auto-starts on first tap) ---
+// --- Updated Music Logic (Only plays on button click) ---
 const song = document.getElementById('loveSong');
 const musicBtn = document.getElementById('musicBtn');
-let playing = false;
-
-function startMusic() {
-    if (!playing) {
-        song.play().catch(e => console.log("Waiting for user interaction..."));
-        playing = true;
-        musicBtn.classList.add('playing');
-    }
-}
 
 function toggleMusic(e) {
-    e.stopPropagation(); 
-    if (playing) {
-        song.pause();
-        musicBtn.classList.remove('playing');
-        musicBtn.innerText = "🔇";
-    } else {
+    if (e) e.stopPropagation(); 
+    if (song.paused) {
         song.play();
         musicBtn.classList.add('playing');
         musicBtn.innerText = "🎵";
+    } else {
+        song.pause();
+        musicBtn.classList.remove('playing');
+        musicBtn.innerText = "🔇";
     }
-    playing = !playing;
 }
 
 // --- Countdown Logic ---
@@ -496,9 +494,9 @@ const targetDate = new Date("Feb 14, 2026 00:00:00").getTime();
 setInterval(() => {
   const now = new Date().getTime();
   const diff = targetDate - now;
-  document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-  document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  document.getElementById('mins').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  document.getElementById('days').innerText = Math.max(0, Math.floor(diff / (1000 * 60 * 60 * 24)));
+  document.getElementById('hours').innerText = Math.max(0, Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
+  document.getElementById('mins').innerText = Math.max(0, Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)));
 }, 1000);
 
 // --- Kiss Animation Logic ---
